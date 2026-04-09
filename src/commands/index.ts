@@ -1,4 +1,6 @@
 export { addCommand } from './add';
-export type { AddOptions } from './add';
-export { getCommand, listCommand } from './get';
-export type { GetOptions } from './get';
+export { getCommand } from './get';
+export { listCommand, formatList } from './list';
+export { removeCommand } from './remove';
+export type { ListOptions, ListResult } from './list';
+export type { RemoveOptions, RemoveResult } from './remove';

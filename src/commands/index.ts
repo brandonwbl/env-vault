@@ -1,6 +1,6 @@
-export { addCommand } from './add';
-export { getCommand } from './get';
-export { listCommand, formatList } from './list';
-export { removeCommand } from './remove';
-export type { ListOptions, ListResult } from './list';
-export type { RemoveOptions, RemoveResult } from './remove';
+export { addEnvVar } from './add';
+export { getEnvVar } from './get';
+export { listEnvVars, formatList } from './list';
+export { removeEnvVar } from './remove';
+export { exportVault, exportToFile } from './export';
+export type { ExportOptions } from './export';

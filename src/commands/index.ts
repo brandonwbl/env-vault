@@ -1,7 +1,9 @@
-export { addEnvVar } from './add';
-export { getEnvVar } from './get';
-export { listEnvVars, formatList } from './list';
-export { removeEnvVar } from './remove';
-export { exportEnvVars } from './export';
-export { importEnvFile } from './import';
-export type { ImportOptions, ImportResult } from './import';
+export { add } from './add';
+export { get } from './get';
+export { list } from './list';
+export { remove } from './remove';
+export { exportEnv } from './export';
+export { importEnv } from './import';
+export { rotate } from './rotate';
+export { copy } from './copy';
+export { merge } from './merge';

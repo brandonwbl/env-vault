@@ -41,6 +41,18 @@ describe('getCommand', () => {
     expect(spy).toHaveBeenCalledWith(expect.stringContaining('"key":"DB_URL"'));
     spy.mockRestore();
   });
+
+  it('throws an error when vault path does not exist', async () => {
+    await expect(
+      getCommand({ vaultPath: '/nonexistent/path.vault', password: TEST_PASSWORD, key: 'API_KEY' })
+    ).rejects.toThrow();
+  });
+
+  it('throws an error when password is incorrect', async () => {
+    await expect(
+      getCommand({ vaultPath: tmpVaultPath, password: 'wrong-password', key: 'API_KEY' })
+    ).rejects.toThrow();
+  });
 });
 
 describe('listCommand', () => {

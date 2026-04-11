@@ -14,5 +14,6 @@ export { inspectCommand, formatInspect } from './inspect';
 export { cloneCommand } from './clone';
 export { tagCommand } from './tag';
 export { tagsCommand, formatAllTags } from './tags';
-export { historyCommand, formatHistory, appendHistoryEntry, loadHistory, saveHistory, getHistoryPath } from './history';
+export { historyCommand, getHistoryPath, loadHistory, saveHistory, appendHistoryEntry, formatHistory } from './history';
 export { undoCommand } from './undo';
+export { envCommand, envSetCommand, envUnsetCommand } from './env';

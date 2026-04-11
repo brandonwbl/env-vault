@@ -16,6 +16,13 @@ export interface ImportResult {
   keys: string[];
 }
 
+/**
+ * Imports environment variables from a .env file into the vault.
+ *
+ * @param options - Import configuration including vault path, env file path, password, and overwrite flag
+ * @returns A summary of how many variables were imported, skipped, and the list of imported keys
+ * @throws If the env file does not exist, contains no valid variables, or the vault cannot be read/written
+ */
 export async function importEnvFile(options: ImportOptions): Promise<ImportResult> {
   const { vaultPath, envFilePath, password, overwrite = false } = options;
 

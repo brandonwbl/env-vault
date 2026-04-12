@@ -40,6 +40,12 @@ Export variables to a `.env` file:
 env-vault export > .env
 ```
 
+List all stored variable keys (without revealing values):
+
+```bash
+env-vault list --env production
+```
+
 ## How It Works
 
 env-vault encrypts your environment variables using AES-256 and stores them in a versioned vault. Team members authenticate with their personal keys, ensuring secrets are never stored in plaintext or committed to source control.

@@ -11,6 +11,10 @@ interface CloneOptions {
 export async function clone(options: CloneOptions): Promise<void> {
   const { sourcePath, destPath, sourcePassword, destPassword, keys } = options;
 
+  if (sourcePath === destPath && !destPassword) {
+    throw new Error('Source and destination paths are the same; provide a different destPassword or destPath');
+  }
+
   const sourceRaw = await readVault(sourcePath);
   const sourceVault = await deserializeVault(sourceRaw, sourcePassword);
 
@@ -18,12 +22,16 @@ export async function clone(options: CloneOptions): Promise<void> {
 
   if (keys && keys.length > 0) {
     const filtered: Record<string, string> = {};
+    const missingKeys: string[] = [];
     for (const key of keys) {
       if (key in entries) {
         filtered[key] = entries[key];
       } else {
-        throw new Error(`Key "${key}" not found in source vault`);
+        missingKeys.push(key);
       }
+    }
+    if (missingKeys.length > 0) {
+      throw new Error(`Keys not found in source vault: ${missingKeys.map(k => `"${k}"`).join(', ')}`);
     }
     entries = filtered;
   }

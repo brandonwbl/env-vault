@@ -54,6 +54,12 @@ describe('listCommand', () => {
     const result = await listCommand({ vaultPath: emptyVaultPath, password: TEST_PASSWORD });
     expect(result.keys).toHaveLength(0);
   });
+
+  it('returns keys in sorted order', async () => {
+    const result = await listCommand({ vaultPath: tmpVaultPath, password: TEST_PASSWORD });
+    const sorted = [...result.keys].sort();
+    expect(result.keys).toEqual(sorted);
+  });
 });
 
 describe('formatList', () => {
@@ -61,6 +67,12 @@ describe('formatList', () => {
     const result = { keys: ['A', 'B'], entries: { A: '***', B: '***' } };
     const output = formatList(result, false);
     expect(output).toBe('A=***\nB=***');
+  });
+
+  it('formats revealed values', () => {
+    const result = { keys: ['A', 'B'], entries: { A: 'hello', B: 'world' } };
+    const output = formatList(result, true);
+    expect(output).toBe('A=hello\nB=world');
   });
 
   it('shows message for empty vault', () => {

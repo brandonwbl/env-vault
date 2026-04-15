@@ -15,6 +15,11 @@ export function registerWatchCommand(program: Command): void {
       const resolvedEnv = path.resolve(envFile);
       const interval = parseInt(opts.interval, 10);
 
+      if (isNaN(interval) || interval <= 0) {
+        console.error('Error: --interval must be a positive integer (milliseconds).');
+        process.exit(1);
+      }
+
       console.log(`Watching ${resolvedEnv} — syncing to vault ${vaultPath}`);
       console.log('Press Ctrl+C to stop.\n');
 

@@ -10,6 +10,18 @@ interface RotateOptions {
 export async function rotate(options: RotateOptions): Promise<void> {
   const { vaultPath, oldPassword, newPassword } = options;
 
+  if (!oldPassword) {
+    throw new Error('Old password must not be empty');
+  }
+
+  if (!newPassword) {
+    throw new Error('New password must not be empty');
+  }
+
+  if (oldPassword === newPassword) {
+    throw new Error('New password must differ from the old password');
+  }
+
   // Read and deserialize the existing vault
   const rawVault = await readVault(vaultPath);
   const vault = deserializeVault(rawVault);

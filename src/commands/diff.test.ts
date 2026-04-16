@@ -63,6 +63,18 @@ describe('diffVaults', () => {
     expect(diff.removed).toEqual({});
     expect(diff.changed).toEqual({});
   });
+
+  it('throws when vault file does not exist', async () => {
+    const missing = path.join(tmpDir, 'missing.vault');
+    const b = await makeTempVault(tmpDir, 'b.vault', { FOO: 'bar' });
+    await expect(diffVaults(missing, b, PASSWORD)).rejects.toThrow();
+  });
+
+  it('throws when password is wrong', async () => {
+    const a = await makeTempVault(tmpDir, 'a.vault', { FOO: 'bar' });
+    const b = await makeTempVault(tmpDir, 'b.vault', { FOO: 'baz' });
+    await expect(diffVaults(a, b, 'wrong-password')).rejects.toThrow();
+  });
 });
 
 describe('formatDiff', () => {

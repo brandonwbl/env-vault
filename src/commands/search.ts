@@ -15,6 +15,14 @@ export async function searchCommand(
 ): Promise<SearchResult[]> {
   const { caseSensitive = false, keysOnly = false, valuesOnly = false } = options;
 
+  if (keysOnly && valuesOnly) {
+    throw new Error('Options keysOnly and valuesOnly cannot both be true.');
+  }
+
+  if (!query || query.trim() === '') {
+    throw new Error('Search query must not be empty.');
+  }
+
   const vault = await readVault(vaultPath);
   const key = await deriveKey(password, vault.salt);
   const entries: VaultData = JSON.parse(
